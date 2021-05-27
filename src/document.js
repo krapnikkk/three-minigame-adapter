@@ -2,6 +2,8 @@ import * as window from './window'
 import Event from './Event'
 import HTMLElement from './HTMLElement'
 import HTMLVideoElement from './HTMLVideoElement'
+import HTMLInputElement from './HTMLInputElement'
+import HTMLTextAreaElement from './HTMLTextAreaElement'
 import Image from './Image'
 import Audio from './Audio'
 import Canvas from './Canvas'
@@ -40,6 +42,10 @@ const document = {
             return new Image()
         } else if (tagName === 'video') {
             return new HTMLVideoElement()
+        } else if (tagName === 'input') {
+            return new HTMLInputElement()
+        } else if (tagName === "textarea") {
+            return new HTMLTextAreaElement()
         }
 
         return new HTMLElement(tagName)
@@ -154,7 +160,7 @@ document.body = new Body()
 
 function onVisibilityChange(visible) {
 
-    return function() {
+    return function () {
 
         document.visibilityState = visible ? 'visible' : 'hidden';
 

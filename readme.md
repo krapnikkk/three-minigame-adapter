@@ -1,6 +1,6 @@
 # three-minigame-adapter
 
-本项目是一个小游戏环境浏览器API的`adapter`, 基于[weapp-adapter](https://github.com/finscn/weapp-adapter)。
+本项目是一个小游戏环境浏览器API的[adapter](https://developers.weixin.qq.com/minigame/dev/guide/best-practice/adapter.html), 基于[weapp-adapter](https://github.com/finscn/weapp-adapter)。
 
 专门针对 ThreeJS 以及ThreeJS一些扩展库(fairygui-three[UI框架]、cannon-es[物理引擎]等等)的底层原生接口适配或优化改良，使之在微信小游戏|淘宝互动|字节小游戏环境中正确运行。
 
@@ -9,6 +9,7 @@
 ## 适配&改良内容
 - 客户端原生适配**TextDecoder**对象的**decode**方法
 - [fairygui-three] 增加适配**AudioContext**对象的部分虚接口，因**AudioContext**适配实现不现实，暂时适配为不报错，建议使用**Audio**进行场景音频管理
+- [fairygui-three] 增加 **HTMLInputElement**和**HTMLTextAreaElement**对象适配实现文本输入框
 
 ## 开发环境一览
 
@@ -28,7 +29,8 @@
   - 【微信小游戏】文件资源问题，需要将资源存储在自己的资源服务器上，因为PC测试环境和真机测试环境的不同，加载方式有差异。当然你可以本地开启个小型资源服务器，然后在同一个局域网下进行测试。
   - 包引用关系,通过引入fairy-three后，fairy-three内部需要引用three库，因此fairy-three库需要跟three放置在同一目录下。
   - 【微信小游戏】开发者工具需要开启【es6转es5】和【增强编译】
-  - 【音频播放】微信小程序不支持AudioContext API，因此不能设置fgui.Stage.audioListener为new THREE.AudioListener,更不要添加到fgui.Stage.camera中
+  - 【微信小程序】关于音频播放，不支持AudioContext API，因此不能设置fgui.Stage.audioListener为new THREE.AudioListener,更不要添加到fgui.Stage.camera中
+  - 【微信小程序】开发者工具环境不支持文本框输入，因为开发者工具环境是使用原生的DOM对象，**Stage.domElement.parentNode.appendChild**插入的对象却是适配，因此会报错，需注释这行代码。
 
 ## 使用方法
 可参考该案例工程[three-minigame-adapter-demo](https://github.com/krapnikkk/three-minigame-adapter-demo)
