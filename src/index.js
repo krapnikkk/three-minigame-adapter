@@ -6,6 +6,7 @@ const global = GameGlobal
 GameGlobal.global = GameGlobal.global || global
 
 function inject() {
+    _window.self = _window;
     _window.document = document;
 
     _window.addEventListener = (type, listener) => {
