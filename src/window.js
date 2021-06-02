@@ -4,6 +4,7 @@ import CommonComputedStyle from './style/CommonComputedStyle'
 import getImageComputedStyle from './style/ImageComputedStyle'
 import getCanvasComputedStyle from './style/CanvasComputedStyle'
 import Event from './Event'
+import $URL from './URL';
 
 export { default as navigator } from './navigator'
 export { default as XMLHttpRequest } from './XMLHttpRequest'
@@ -27,6 +28,7 @@ export { default as localStorage } from './localStorage'
 export { default as location } from './location'
 export { default as TextDecoder } from './TextDecoder'
 export { btoa, atob } from './Base64.js'
+export { default as Blob } from './Blob.js'
 export { default as Symbol } from './Symbol'
 export * from './WindowProperties'
 
@@ -65,20 +67,20 @@ function alert(msg) {
     console.log(msg);
 }
 
-function focus() {}
+function focus() { }
 
-function blur() {}
+function blur() { }
 
 if (platform !== 'devtools') {
     const wxPerf = wx.getPerformance ? wx.getPerformance() : Date;
     const consoleTimers = {};
-    console.time = function(name) {
+    console.time = function (name) {
         consoleTimers[name] = wxPerf.now();
     };
 
-    console.timeEnd = function(name) {
+    console.timeEnd = function (name) {
         const timeStart = consoleTimers[name];
-        if(!timeStart) {
+        if (!timeStart) {
             return;
         }
 
@@ -111,7 +113,7 @@ const _setInterval = setInterval;
 const _clearInterval = clearInterval;
 const _requestAnimationFrame = requestAnimationFrame;
 const _cancelAnimationFrame = cancelAnimationFrame;
-
+const URL = new $URL();
 export {
     canvas,
     alert,
@@ -120,6 +122,7 @@ export {
     getComputedStyle,
     scrollTo,
     scrollBy,
+    URL,
 
     _setTimeout as setTimeout,
     _clearTimeout as clearTimeout,
