@@ -8,8 +8,10 @@
 
 ## 适配&改良内容
 - 客户端原生适配**TextDecoder**对象的**decode**方法
-- [fairygui-three] 增加适配**AudioContext**对象的部分虚接口，因**AudioContext**适配实现不现实，暂时适配为不报错，建议使用**Audio**进行场景音频管理
-- [fairygui-three] 增加 **HTMLInputElement**和**HTMLTextAreaElement**对象适配实现文本输入框
+- 最小限度支持Blob对象和URL对象的createObjectURL方法
+- 注入全局对象window.self
+- 增加适配**AudioContext**对象的部分虚接口，因**AudioContext**适配实现不现实，暂时适配为不报错，建议使用**Audio**进行场景音频管理
+- 增加 **HTMLInputElement**和**HTMLTextAreaElement**对象适配实现文本输入框
 
 ## 开发环境一览
 
@@ -27,8 +29,6 @@
 - threejs
   - [r117->r118](https://github.com/mrdoob/three.js/wiki/Migration-Guide#r117--r118)时，three启动默认启动 **WebGL2rendering**；目前IOS系统不支持WebGL 2.0, 可是 canvas.getContext("webgl2") 和 canvas.getContext("experimental-webgl2") 返回的却不是空. 导致某些通过类似代码判断webgl版本的程序出错。因此启动程序的时候需要判断系统的差异性进行启动。
   - 不支持GLTF扩展的Draco压缩，具体原因参考[此篇文章](https://juejin.cn/post/6931954784018628621)
-  - 最小限度支持Blob对象和URL对象的createObjectURL方法
-  - 注入全局对象window.self
 - fairygui-three
   - 【微信小游戏】[微信小游戏限制读取本地文件格式](https://developers.weixin.qq.com/minigame/dev/guide/framework/code-package.html)，如果UI资源是存储在小游戏工程内的话，发布资源要设置后缀为支持的文件格式，同时加载资源前需要配置一下资源后缀：fgui.UIConfig.packageFileExtension = "支持的文件格式";
   - 【微信小游戏】文件资源问题，需要将资源存储在自己的资源服务器上，因为PC测试环境和真机测试环境的不同，加载方式有差异。当然你可以本地开启个小型资源服务器，然后在同一个局域网下进行测试。
@@ -50,3 +50,4 @@ import './js/libs/adapter/index.js'
 
 ## 参考
 - [weapp-adapter](https://github.com/finscn/weapp-adapter)
+- [three-platformize](https://github.com/deepkolos/three-platformize)
